@@ -1,0 +1,253 @@
+@use '../mixin.scss' as m;
+
+body{
+  background: var(--navy);
+  background-image: url(../../img/line-pattern.png);
+  background-size: 15px;
+  animation: bgmove 150s infinite linear;
+  @include m.scrollbar;
+  @media #{m.$min-lg}{
+    padding-top: 80px;
+  }//min-lg
+  @media #{m.$max-lg}{
+    padding-top: 60px;
+  }//max-lg
+  @keyframes bgmove{
+    0%{background-position: 0 0;} //좌우0 수직0
+    100%{background-position: -100% 0;}
+  }//@keyframes bgmove
+  main{
+    min-height: 50vh;
+    overflow: hidden;
+  }//main
+}//body
+
+section.common-section{
+  padding: 30px 0;
+  margin: 0 auto;
+  p.no-data{
+    font-style: italic;
+    text-decoration: line-through;
+    margin-left: 20px;
+    color: var(--green);
+  }//.no-data
+  h2{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    i{
+      color: var(--sky);
+      margin-right: 10px;
+      font-size: 1.5em;
+    }//i
+    em{
+      font-size: 1.5em;
+      font-weight: 600;
+    }//em
+    &::after{
+      content: '';
+      flex: 1;
+      margin-left: 10px;
+      border: 1px solid rgba(#FFF,.3);
+    }//h2::after
+  }//h2
+}//.common-section
+
+section.movie-grid-section{
+  div.grid-container{
+    figure{ //div가 flex이므로 높이를 주지 않았어도 높이가 같음.
+      padding: 0 10px; // swiper해야하므로 margin은 X. 
+      box-sizing: border-box; //swiper해서 plug가 넓이를 자동으로 지정하므로
+      height: auto; //swiper-slide 때문에 높이변동생겨서 해야함
+      a{
+        display: block; // 높이주려고 block레벨 처리 
+        height: 100%; 
+        //figure가 높이를 안줬어도 flex의 자식이므로 높이가 생겼으므로 가능. 
+        //figcaption은 글자높이에 따라 밑에 구멍생길 수 있으므로 a에 줌
+        background: var(--sky);
+        transition: all .3s;
+        &:hover{
+          position: relative; //z-index적용하려고
+          z-index: 11;
+          transform: scale(1.1);
+          background: var(--green);
+          div.imgbox img{
+            filter: brightness(100%);
+          }//div.imgbox img
+        }//&:hover
+        div.imgbox{
+          position: relative;
+          overflow: hidden;
+          img{
+            width: 100%;
+            filter: brightness(80%);
+            transition: all 1s;
+          }//img
+          span{
+            position: absolute;
+            width: 86px;
+            height: 86px;
+            right: -48px; 
+            top: -48px;
+            transform: rotate(45deg);
+          }//span
+          small{
+            position: absolute;
+            color: #FFF;
+            right: 5px ;
+            top: 5px;
+          }//small
+        }//div.imgbox
+        figcaption{
+          padding: 10px;
+          h3, p{
+            @include m.ellipsis; 
+          }//h3, p
+          h3{ 
+            font-size: 1.2em;
+            font-weight: 600;
+          }//h3
+          p{
+            font-size: 0.9em;
+          }//p
+        }//figcaption
+      }//a
+    }//figure
+  }//div
+}//section.movie-grid-section
+
+section.swiper-section{
+  .carousel{
+    position: relative;
+    &::before, &::after{
+      content: '';
+      position: absolute;
+      z-index: 13;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      backdrop-filter: blur(2px) brightness(60%); //밑에 깔린 엘리먼트에 필터 적용.
+    }//&::before, &::after
+    &::before{right: 100%;}
+    &::after{left: 100%;}
+    &:hover{
+      @media (hover:hover){
+        .next, .prev{opacity: 1;}
+      }
+    }//.carousel:hover
+    .next, .prev{
+      display: none;
+      @media (hover:hover){
+        display: block;
+      }
+      position: absolute;
+      z-index: 12;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3em;
+      opacity: 0;
+      transition: opacity .5s;
+    }//.next, .prev
+    .prev{
+      left: 0;
+    }
+    .next{
+      right: 0;
+    }
+    
+  }//.carousel
+}//section.swiper-section
+
+section.wrap-section{
+  .grid-container{
+    display: flex;
+    flex-wrap: wrap;
+    figure{
+      margin-bottom: 20px;
+      @media #{m.$min-xlg}{
+        width: 20%;
+      }//1400이상
+      @media #{m.$xlg}{
+        width: 25%;  
+      }//1000~1400
+      @media #{m.$md}{
+        width: 33.33%;
+      }//1000~500
+      @media #{m.$max-sm}{
+        width: 50%;
+      }//500이하
+    }//figure
+  }//.grid-container
+}//section.wrap-section
+
+section.scroll-section{
+  div.grid-container{
+    @include m.scrollbar;  
+    overflow-x: auto; //필요에 따라 스크롤바 생성(scroll-> 항상 있음)
+    display: flex; //flex는 부모에 맞춰서 자식이 줄어들므로 flex-shrink해줌.
+    padding-bottom: 20px;
+    >*{
+      flex-shrink: 0; //flex해도 압축되지않고 파일이 옆으로 좌라락 나열되도록 하는 것.
+      overflow: hidden;
+      margin-right: 20px;
+      box-sizing: border-box;
+      border: 5px solid #EEE;
+      &:hover{
+        img{
+          filter: brightness(100%);
+          transform: scale(1.1);
+        }
+      }//button.hover
+      img{
+        filter: brightness(70%);
+        transition: all .5s;
+        width: 100%;
+      }//img
+    }//button
+  }//div.grid-container
+}//section.scroll-section
+
+section.img-section{
+  .grid-container{
+    a{
+      display: block;
+      width: 250px;
+    }//a
+  }//.grid-container
+}//section.img-section
+
+section.video-section{
+  .grid-container{
+    button{
+      width: 250px;
+    }//button
+  }//.grid-container
+}//section.video-section
+
+section.people-section{
+  figure{
+    width: 170px;
+    &:hover figcaption{
+      background: var(--sky);
+      em{
+        color: var(--navy);
+      }
+    }//&:hover figcaption
+    figcaption{
+      position: relative;
+      background: var(--navy);
+      padding: 10px;
+      em{
+        display: block;
+        color: var(--green);
+        @include m.ellipsis;
+      }//em
+      b{
+        display: block;
+        @include m.ellipsis;
+        font-style: italic;
+        font-weight: 600;
+      }
+    }
+  }//figure
+}//section.people-section

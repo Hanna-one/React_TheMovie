@@ -1,0 +1,32 @@
+@use '../mixin' as m;
+
+.slide{
+  overflow: hidden;
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  //개발중인css를 적용할 떄는 프리패스?와 같이 쓰기
+  -webkit-mask-image: url(../../img/mask.png); 
+  -webkit-mask-size: 100% 100%;
+  mask-image: url(../../img/mask.png);
+  mask-size: 100% 100%;
+  @media #{m.$min-lg}{
+    height: 35vh;
+    filter: brightness(30%);
+  }//min-lg
+  @media #{m.$max-lg}{
+    height: 50vh;
+    filter: brightness(70%);
+  }//max-lg
+  img{
+    position: absolute;
+    transform: scale(1.1);
+    opacity: 0;
+    @include m.cover;
+    transition: transform 5s linear, opacity 1s;
+    &.active{
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}//.slide

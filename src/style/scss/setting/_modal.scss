@@ -1,0 +1,130 @@
+@use '../mixin.scss' as m;
+
+section.video-modal{
+  display: none; 
+  position: fixed;
+  z-index: 101; //header가 100인데 header보다 위에 올라와야하므로
+  left: 0; top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  img.youtube-ratio{ 
+  //이미지는 비율 유지됨->이미지를 먼저 놓고 video를 이미지사이즈에 맞추기
+    max-width: 90%;
+    max-height: 90%;
+    opacity: 0;
+    @include m.pos-center;
+  }//img.youtube-ratio
+  iframe{
+    @include m.pos-center;
+  }//iframe
+}//section.video-modal
+
+section.person-modal{
+  display: none; 
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  @include m.scrollbar;
+  overflow: auto;
+  z-index: 101; //같은 z-index가진경우 마지막 엘리먼트가 위로 올라옴
+  background: rgba(#000,.85);
+  div.center{
+    width: min(90%, 600px);
+    margin: 10vh auto;
+    text-align: center;
+    img.person-photo{
+      width: min(60%,300px);
+      margin: 0 auto;
+      margin-bottom: 30px;
+      border: 5px solid #EEE;
+    }//.person-photo
+    h4{
+      margin-bottom: 20px;
+      text-align: left;
+      font-style: italic;
+      font-size: 1.3em;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--green);
+      border-bottom: 1px solid var(--green);
+    }
+    ul{
+      overflow: hidden;
+      padding: 10px;
+      box-sizing: border-box;
+      height: 200px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      background: rgba(#FFF,.15);
+      transition: height .5s;
+      li{
+        padding: 5px;
+        border-bottom: 1px dotted rgba(#FFF,.5);
+      }//li
+    }//ul
+    ul.profile{
+      li{
+        &:not(:last-child){
+          @include m.ellipsis;
+        }
+        small{opacity: .7; margin-right: 10px;}
+        em{font-style: italic;}
+      }//li
+    }//ul.profile
+    ul.filmography{
+      li{
+        time{
+          opacity: .7;
+          margin-right: 10px;
+          font-style: italic;
+        }//time
+        a{
+          em{
+            font-size: 1.1em;
+            
+          }//em
+          small{
+            font-style: italic;
+          }//small
+          &:hover{
+            color: var(--green);
+            text-decoration: underline;
+          }//a:hover
+        }//a
+      }//li
+    }//ul.filmography
+  }//div.center
+  .more-btn{
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    font-style: italic;
+    transition: all .3s;
+    letter-spacing: .2em;
+    .close{
+      display: none;
+    }//.close
+    &.active{
+      .open{
+        display: none;
+      }//.open
+      .close{
+        display: block;
+      }//.close
+    }//more-btn.active
+  }//.more-btn
+}//section.person-modal
+
+button.modal-close-btn{
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  font-size: 1.5em;
+  opacity: .7;
+  &:hover{
+    opacity: 1;
+  }//&.hover
+}//.close
