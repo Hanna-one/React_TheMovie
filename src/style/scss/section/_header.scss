@@ -1,0 +1,99 @@
+@use '../setting/mixin.scss' as m;
+
+header{
+  position: absolute;
+  z-index: 100;
+  top: 0;left: 0;
+  width: 100%;
+  background-color: var(--navy);
+  background-image: url("../../../../public/img/check-pattern.png");
+  background-size: 15px;
+  @media #{m.$min-lg}{
+    height: 80px;
+  }//min-lg
+  @media #{m.$max-lg}{
+    height: 60px;
+  }//max-lg
+  .center{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 95%;
+    margin: 0 auto;
+    height: inherit;
+    h1{
+      height: 60%;
+      a{
+        /*
+        css에서는 inline레벨은 부모가 아니라 높이를 줘야 img도 높이적용O.
+        안주면은 a의 부모인 h1을 기준으로 img가 높이설정됨.
+        */
+        display: flex; 
+        height: 100%;
+        perspective: 1000px;
+        img{
+        height: 100%; //부모가 height로 되어있으면 height 100%
+        margin-right: 10px;
+        transition: all .5s;
+        }//img
+      }//a
+      &:hover{
+        img:first-of-type{
+          transform: rotateY(360deg);
+        }//img:first-child
+        img:last-of-type{          
+          transform: rotateX(360deg);
+        }//img:last-child
+      }//h1:hover
+    }//h1
+
+    .gnb{
+      position: relative;
+      div.menu-list{
+        position: absolute;
+        top: 0;
+        right: 110%;
+        display: inline-block;
+        button.toggle-btn{
+          margin-right: 10px;
+          &:active{ //누르고 있는 동안
+            color: var(--green);
+          }//&:active
+        }//button.toggle-btn
+        ul{
+          display: none;
+          position: absolute;
+          padding: 20px;
+          top: 30px;
+          left: 50%;
+          transform: translate(-50%);
+          border-radius: 5px;
+          background: #000;
+          &.active{
+            display: block;
+          }//&.active
+          li{
+            margin: 7px 0;
+            white-space: nowrap;
+            a:hover{
+              color: var(--green);
+              text-decoration: underline;
+            }
+          }//li
+        }//ul
+      }//div.menu-list
+      a.goto-search{
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        transition: all .3s;
+        svg{
+          margin-right: 5px;
+        }
+        &:hover{
+          color: var(--green);
+        }
+      }//a
+    }//.gnb
+  }//.center
+}//header

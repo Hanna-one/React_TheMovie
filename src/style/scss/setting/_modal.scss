@@ -1,21 +1,16 @@
-@use '../mixin.scss' as m;
+@use './mixin.scss' as m;
 
 section.video-modal{
-  display: none; 
+  display: block; 
   position: fixed;
   z-index: 101; //header가 100인데 header보다 위에 올라와야하므로
   left: 0; top: 0;
   width: 100vw;
   height: 100vh;
   background: #000;
-  img.youtube-ratio{ 
-  //이미지는 비율 유지됨->이미지를 먼저 놓고 video를 이미지사이즈에 맞추기
-    max-width: 90%;
-    max-height: 90%;
-    opacity: 0;
-    @include m.pos-center;
-  }//img.youtube-ratio
   iframe{
+    width: 90%;
+    height: 70%;
     @include m.pos-center;
   }//iframe
 }//section.video-modal

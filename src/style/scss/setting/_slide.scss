@@ -1,4 +1,4 @@
-@use '../mixin' as m;
+@use './mixin.scss' as m;
 
 .slide{
   overflow: hidden;
@@ -6,9 +6,9 @@
   top: 60px;
   width: 100%;
   //개발중인css를 적용할 떄는 프리패스?와 같이 쓰기
-  -webkit-mask-image: url(../../img/mask.png); 
+  -webkit-mask-image: url("../../../../public/img/mask.png"); 
   -webkit-mask-size: 100% 100%;
-  mask-image: url(../../img/mask.png);
+  mask-image: url("../../../../public/img/mask.png");
   mask-size: 100% 100%;
   @media #{m.$min-lg}{
     height: 35vh;

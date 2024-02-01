@@ -1,0 +1,24 @@
+@use '../setting/mixin.scss' as m;
+
+.top-btn{
+  position: fixed;
+  z-index: 90;
+  right: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  background: var(--sky);
+  transition: all .5s;
+  opacity: 0;
+  pointer-events: none;
+  @include m.box-shadow;
+  @media (hover:hover){
+    &:hover{
+    background: var(--green);
+    }
+  }//media
+  &.active{
+    opacity: 1;
+    pointer-events: all;
+  }//active 
+}//.top-btn

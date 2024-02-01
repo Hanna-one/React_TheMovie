@@ -1,8 +1,8 @@
-@use '../mixin.scss' as m;
+@use './mixin.scss' as m;
 
 body{
   background: var(--navy);
-  background-image: url(../../img/line-pattern.png);
+  background-image: url("../../../../public/img/line-pattern.png");
   background-size: 15px;
   animation: bgmove 150s infinite linear;
   @include m.scrollbar;

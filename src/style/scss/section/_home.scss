@@ -1,0 +1,155 @@
+@use '../setting/mixin.scss' as m;
+
+.home-visual{
+  position: relative;
+  overflow: hidden;
+  height: min(70vh, 450px);
+  margin-bottom: 5vh;
+  cursor: grab;
+  &:active{ 
+    cursor: grabbing
+  }
+  @include m.box-shadow;
+  &::before{
+    content: '';
+    pointer-events: none;
+    @include m.pos-center;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    border: 1px solid rgba(#FFF,.3);
+    z-index: 11;
+  }//.home-visual::before
+  div.swiper-wrapper{ /* 넓이는 절대 주면 안됨★★★★ */
+    height: 100%;
+    figure.swiper-slide{ /* 넓이는 절대 주면 안됨★★★★ */
+      position: relative;
+      height: 100%; //높이는 안줘도 됨. plug css에 기본으로 들어가있음
+      box-sizing: border-box;
+      overflow: hidden;
+      &.swiper-slide-active img{
+        transform: scale(1);
+      }
+      &:hover img{
+        filter: brightness(80%)
+      }//&.hover img
+      img{
+        @include m.cover;
+        background: green;
+        filter: brightness(60%);
+        transform: scale(1.1);
+        transition: transform 10s linear, filter 1s;
+      }//img
+      figcaption{
+        position: absolute;
+        left: 5%;
+        top: 50%;
+        transform: translateY(-50%); //내 크기의 반절만큼 위로 올림
+        width: 90%;
+        small{
+          font-weight: 600;
+          font-size: 1.2em;
+        }//small
+        h6{
+          margin-top: 5px; //small이 inline이라 margin-bottom X. 여기서 top주기
+          font-size: min(8vw, 5em); //미디어쿼리보다는 min 으로 쓰기
+          white-space: nowrap; //줄바꿈 안함
+          line-height: 1.3em;
+          font-weight: 600;
+          @media #{m.$max-xlg}{
+            @include m.ellipsis;
+          }//$max-xlg
+        }//h6
+        p{
+          margin: 20px 0;
+          max-width: 500px;
+        }//p
+        div{
+          display: flex;
+          button{
+            &.play-btn{
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-right: 5px;
+              @include m.button(#FFF,#FFF,rgba(#FFF,.3),#000,#FFF,rgba(#FFF,.8));
+              svg{
+                margin-right: 10px;
+              }
+            }//&.play-btn
+            &.detail-btn{
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              @include m.button(#FFF,#FFF,rgba(#000,.3),#FFF,#000,rgba(#000,.8));
+              svg{
+                margin-right: 10px;
+              }
+            }//&.detail-btn
+          }//button
+        }
+      }//figcaption
+    }//figure.swiper-slide
+  }//div.swiper-wrapper
+  .wheel-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 12;
+    left: calc(50% - 20px);
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 1px solid rgba(#FFF,.5);
+    background: rgba(#FFF,.3);
+    &::before{
+      content: '';
+      @include m.pos-center;
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(#FFF,.5);
+      border-radius: 50%;
+    }//.wheel-btn::before
+    svg{
+      animation: jump .5s infinite alternate;
+    }//i
+  }//.wheel-btn
+  @keyframes jump {
+    0%{transform: translateY(-3px);}
+    100%{transform: translateY(3px);}
+  }
+}//.home-visual
+
+main.home-content{
+  section.common-section{
+    width: min(90%,1600px);
+  }//section.common-section
+}//.home-content
+
+.top-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 90;
+  right: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  background: var(--sky);
+  transition: all .5s;
+  opacity: 0;
+  pointer-events: none;
+  @include m.box-shadow;
+  @media (hover:hover){
+    &:hover{
+    background: var(--green);
+    }
+  }//media
+  &.active{
+    opacity: 1;
+    pointer-events: all;
+  }//active 
+}//.top-btn

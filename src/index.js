@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import NotFound from './pages/NotFound';
-import Main from './pages/Main';
+import Home from './pages/Home';
+import "./style/scss/style.scss";
+import reportWebVitals from './reportWebVitals';
+
 
 const router = createBrowserRouter([
   {
@@ -12,7 +14,7 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <NotFound />,
     children: [
-      {path: '/', element: <Main />}
+      {path: '/', element: <Home />}
     ]
   }
 ])
