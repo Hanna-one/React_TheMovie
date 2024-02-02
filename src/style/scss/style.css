@@ -79,7 +79,6 @@ section.common-section h2::after {
 section.movie-grid-section div.grid-container figure {
   padding: 0 10px;
   box-sizing: border-box;
-  height: auto;
 }
 section.movie-grid-section div.grid-container figure a {
   display: block;
@@ -90,10 +89,10 @@ section.movie-grid-section div.grid-container figure a {
 section.movie-grid-section div.grid-container figure a:hover {
   position: relative;
   z-index: 11;
-  transform: scale(1.1);
   background: var(--green);
 }
 section.movie-grid-section div.grid-container figure a:hover div.imgbox img {
+  transform: scale(1.1);
   filter: brightness(100%);
 }
 section.movie-grid-section div.grid-container figure a div.imgbox {
@@ -103,7 +102,7 @@ section.movie-grid-section div.grid-container figure a div.imgbox {
 section.movie-grid-section div.grid-container figure a div.imgbox img {
   width: 100%;
   filter: brightness(80%);
-  transition: all 1s;
+  transition: all 0.3s;
 }
 section.movie-grid-section div.grid-container figure a div.imgbox span {
   position: absolute;
@@ -137,22 +136,17 @@ section.movie-grid-section div.grid-container figure a figcaption p {
 
 section.swiper-section .carousel {
   position: relative;
-}
-section.swiper-section .carousel::before, section.swiper-section .carousel::after {
-  content: "";
-  position: absolute;
-  z-index: 13;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  -webkit-backdrop-filter: blur(2px) brightness(60%);
-          backdrop-filter: blur(2px) brightness(60%);
-}
-section.swiper-section .carousel::before {
-  right: 100%;
-}
-section.swiper-section .carousel::after {
-  left: 100%;
+  /* &::before, &::after{
+    content: '';
+    position: absolute;
+    z-index: 13;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    backdrop-filter: blur(2px) brightness(60%); //밑에 깔린 엘리먼트에 필터 적용.
+  }//&::before, &::after
+  &::before{right: 100%;}
+  &::after{left: 100%;} */
 }
 @media (hover: hover) {
   section.swiper-section .carousel:hover .next, section.swiper-section .carousel:hover .prev {

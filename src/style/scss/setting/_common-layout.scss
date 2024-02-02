@@ -58,7 +58,7 @@ section.movie-grid-section{
     figure{ //div가 flex이므로 높이를 주지 않았어도 높이가 같음.
       padding: 0 10px; // swiper해야하므로 margin은 X. 
       box-sizing: border-box; //swiper해서 plug가 넓이를 자동으로 지정하므로
-      height: auto; //swiper-slide 때문에 높이변동생겨서 해야함
+      //height: auto; //swiper-slide 때문에 높이변동생겨서 해야함
       a{
         display: block; // 높이주려고 block레벨 처리 
         height: 100%; 
@@ -69,9 +69,9 @@ section.movie-grid-section{
         &:hover{
           position: relative; //z-index적용하려고
           z-index: 11;
-          transform: scale(1.1);
           background: var(--green);
           div.imgbox img{
+            transform: scale(1.1);
             filter: brightness(100%);
           }//div.imgbox img
         }//&:hover
@@ -81,7 +81,7 @@ section.movie-grid-section{
           img{
             width: 100%;
             filter: brightness(80%);
-            transition: all 1s;
+            transition: all 0.3s;
           }//img
           span{
             position: absolute;
@@ -119,7 +119,7 @@ section.movie-grid-section{
 section.swiper-section{
   .carousel{
     position: relative;
-    &::before, &::after{
+    /* &::before, &::after{
       content: '';
       position: absolute;
       z-index: 13;
@@ -129,7 +129,7 @@ section.swiper-section{
       backdrop-filter: blur(2px) brightness(60%); //밑에 깔린 엘리먼트에 필터 적용.
     }//&::before, &::after
     &::before{right: 100%;}
-    &::after{left: 100%;}
+    &::after{left: 100%;} */
     &:hover{
       @media (hover:hover){
         .next, .prev{opacity: 1;}

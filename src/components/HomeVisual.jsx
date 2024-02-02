@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { options, ko, en, imgPaths } from '../api/api-data.js';
+import { options, en, imgPaths } from '../api/api-data.js';
 import { getMovie, getMovies, getVideos } from '../api/api-function.js';
 import { BsGooglePlay, BsInfoCircleFill } from 'react-icons/bs';
 import { FaArrowDown } from 'react-icons/fa6';
@@ -25,7 +25,7 @@ export default function HomeVisual() {
     let overviews = [];
 
     for (let movie of playinglist) { //for안에서 await하려고 forEach 대신 쓰는 것. movie는 객체.
-      let { id, title, original_title, overview, backdrop_path } = movie
+      let { id, overview } = movie
 
       if (!overview) { //lang=ko 가 default이므로 한글로 된 영화설명이 없으면 그것만 따로 영어로 가져오는 것.
         let movieEn = await getMovie(id, en)//영어로 된 영화정보를 가져온다
@@ -64,14 +64,10 @@ export default function HomeVisual() {
     <section className="home-visual swiper-container">
       <div className="swiper-wrapper">
         <Swiper
-          navigation={{
-            prevEl: ".prevBtn",
-            nextEl: ".nextBtn",
-          }}
           modules={[Navigation, Autoplay]}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           loop={true}
-          loopedslides={1}
+          loopedslides={2}
           slidesPerView={1}
         >
           {movieList.map((list, idx) =>
@@ -82,7 +78,7 @@ export default function HomeVisual() {
                   <small className="original-title">{list.original_title}</small>
                   <h6 className="title">{list.title}</h6>
                   <p className="overview">
-                    {`${overviewList[idx].slice(0,150)}...`}
+                    {`${overviewList[idx].slice(0, 150)}...`}
                   </p>
                   <div>
                     <button type="button" className="play-btn" data-id={videoKeyList[idx]} onClick={(e) => handlePlay(e)}>
@@ -94,7 +90,7 @@ export default function HomeVisual() {
                   </div>
                 </figcaption>
               </figure>
-          </SwiperSlide>
+            </SwiperSlide>
           )}
         </Swiper>
       </div>
@@ -109,6 +105,9 @@ export default function HomeVisual() {
           </button>
         </section>
       }
+
+      <button className="prev prevBtn"></button>
+      <button className="next nextBtn"></button>
 
       <button className="wheel-btn">
         <FaArrowDown />
