@@ -1,22 +1,33 @@
-@use './mixin.scss' as m;
+@use "./mixin.scss" as m;
 
-section.video-modal{
-  display: block; 
+section.video-modal {
+  display: block;
   position: fixed;
   z-index: 101; //header가 100인데 header보다 위에 올라와야하므로
-  left: 0; top: 0;
+  left: 0;
+  top: 0;
   width: 100vw;
   height: 100vh;
   background: #000;
-  iframe{
+  .youtube-ratio {
+    position: relative;
     width: 90%;
-    height: 70%;
+    height: 90%;
+    overflow: hidden;
     @include m.pos-center;
-  }//iframe
-}//section.video-modal
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      @include m.pos-center;
+    } //iframe
+  } //.youtube-ratio
+} //section.video-modal
 
-section.person-modal{
-  display: none; 
+section.person-modal {
+  display: none;
   position: fixed;
   left: 0;
   top: 0;
@@ -25,18 +36,18 @@ section.person-modal{
   @include m.scrollbar;
   overflow: auto;
   z-index: 101; //같은 z-index가진경우 마지막 엘리먼트가 위로 올라옴
-  background: rgba(#000,.85);
-  div.center{
+  background: rgba(#000, 0.85);
+  div.center {
     width: min(90%, 600px);
     margin: 10vh auto;
     text-align: center;
-    img.person-photo{
-      width: min(60%,300px);
+    img.person-photo {
+      width: min(60%, 300px);
       margin: 0 auto;
       margin-bottom: 30px;
-      border: 5px solid #EEE;
-    }//.person-photo
-    h4{
+      border: 5px solid #eee;
+    } //.person-photo
+    h4 {
       margin-bottom: 20px;
       text-align: left;
       font-style: italic;
@@ -46,80 +57,84 @@ section.person-modal{
       color: var(--green);
       border-bottom: 1px solid var(--green);
     }
-    ul{
+    ul {
       overflow: hidden;
       padding: 10px;
       box-sizing: border-box;
       height: 200px;
       margin-bottom: 20px;
       border-radius: 5px;
-      background: rgba(#FFF,.15);
-      transition: height .5s;
-      li{
+      background: rgba(#fff, 0.15);
+      transition: height 0.5s;
+      li {
         padding: 5px;
-        border-bottom: 1px dotted rgba(#FFF,.5);
-      }//li
-    }//ul
-    ul.profile{
-      li{
-        &:not(:last-child){
+        border-bottom: 1px dotted rgba(#fff, 0.5);
+      } //li
+    } //ul
+    ul.profile {
+      li {
+        &:not(:last-child) {
           @include m.ellipsis;
         }
-        small{opacity: .7; margin-right: 10px;}
-        em{font-style: italic;}
-      }//li
-    }//ul.profile
-    ul.filmography{
-      li{
-        time{
-          opacity: .7;
+        small {
+          opacity: 0.7;
+          margin-right: 10px;
+        }
+        em {
+          font-style: italic;
+        }
+      } //li
+    } //ul.profile
+    ul.filmography {
+      li {
+        time {
+          opacity: 0.7;
           margin-right: 10px;
           font-style: italic;
-        }//time
-        a{
-          em{
+        } //time
+        a {
+          em {
             font-size: 1.1em;
-            
-          }//em
-          small{
+          } //em
+          small {
             font-style: italic;
-          }//small
-          &:hover{
+          } //small
+          &:hover {
             color: var(--green);
             text-decoration: underline;
-          }//a:hover
-        }//a
-      }//li
-    }//ul.filmography
-  }//div.center
-  .more-btn{
+          } //a:hover
+        } //a
+      } //li
+    } //ul.filmography
+  } //div.center
+  .more-btn {
     margin-bottom: 30px;
     text-transform: uppercase;
     font-size: 0.8em;
     font-style: italic;
-    transition: all .3s;
-    letter-spacing: .2em;
-    .close{
+    transition: all 0.3s;
+    letter-spacing: 0.2em;
+    .close {
       display: none;
-    }//.close
-    &.active{
-      .open{
+    } //.close
+    &.active {
+      .open {
         display: none;
-      }//.open
-      .close{
+      } //.open
+      .close {
         display: block;
-      }//.close
-    }//more-btn.active
-  }//.more-btn
-}//section.person-modal
+      } //.close
+    } //more-btn.active
+  } //.more-btn
+} //section.person-modal
 
-button.modal-close-btn{
+button.modal-close-btn {
   position: fixed;
   right: 20px;
   top: 20px;
   font-size: 1.5em;
-  opacity: .7;
-  &:hover{
+  opacity: 0.7;
+  &:hover {
     opacity: 1;
-  }//&.hover
-}//.close
+  } //&.hover
+} //.close
