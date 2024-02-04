@@ -1,4 +1,6 @@
+import axios from "axios";
 import { baseUrl, apiKey, ko, en, options, imgPaths, gradeColors, genreList } from "./api-data.js";
+import { useEffect, useState } from "react";
 // import { qySel, qySelAll, setPersonModal, showModal, sortArray, videoResize } from "./functions.js";
 
 export const getMovies = (option, lang=ko, page = 1) => { 
@@ -8,6 +10,15 @@ export const getMovies = (option, lang=ko, page = 1) => {
     let data = await result.json()
     resolve(data) 
   })//promise
+}//getMovies
+
+export const GetMovieslist = (option, lang=ko, page = 1) => { 
+  const [list, setList] = useState([]);
+  useEffect(()=>{
+    axios.get(`${baseUrl}${option}${apiKey}${lang}&include_adult=false&page=${page}`) 
+    .then(result => setList(result.data.results))
+  }, [option])
+  return [list];
 }//getMovies
 
 export const getMovie = (movieId, lang=ko) => {

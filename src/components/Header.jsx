@@ -14,8 +14,8 @@ export default function Header() {
         <h1>
           <Link to="/">
             <span className="hidden">영화 정보 사이트</span>
-            <img src="./img/logo.png" alt="" />
-            <img src="./img/logo-text.png" alt="" />
+            <img src="http://localhost:3000/img/logo.png" alt="" />
+            <img src="http://localhost:3000/img/logo-text.png" alt="" />
           </Link>
         </h1>
 

@@ -823,6 +823,173 @@ main.home-content section.common-section {
   pointer-events: all;
 }
 
+.top-btn {
+  position: fixed;
+  z-index: 90;
+  right: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  background: var(--sky);
+  transition: all 0.5s;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+@media (hover: hover) {
+  .top-btn:hover {
+    background: var(--green);
+  }
+}
+.top-btn.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+main.detail-content {
+  position: relative;
+  margin: 20vh auto 0 auto;
+  width: min(90%, 1400px);
+}
+
+section.detail-section {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+@media screen and (min-width:1000px) {
+  section.detail-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+@media screen and (min-width:1000px) {
+  section.detail-section img.poster {
+    width: 25%;
+  }
+}
+@media screen and (max-width:1000px) {
+  section.detail-section img.poster {
+    display: none;
+  }
+}
+section.detail-section div.detail-info {
+  /* ul.info--------------------------- */
+}
+@media screen and (min-width:1000px) {
+  section.detail-section div.detail-info {
+    width: 70%;
+  }
+}
+section.detail-section div.detail-info h2 {
+  margin-bottom: 20px;
+  font-size: min(10vw, 5em);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+section.detail-section div.detail-info ul.meta {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+section.detail-section div.detail-info ul.meta li {
+  margin-right: 10px;
+}
+section.detail-section div.detail-info ul.meta li div.vote_average {
+  position: relative;
+  display: inline-block;
+  vertical-align: bottom;
+  width: 60px;
+  height: 60px;
+}
+section.detail-section div.detail-info ul.meta li div.vote_average svg {
+  width: 100%;
+  border-radius: 50%;
+  background: var(--navy);
+  box-shadow: 0 0 10px rgba(140, 205, 162, 0.2);
+}
+section.detail-section div.detail-info ul.meta li div.vote_average svg circle {
+  stroke-width: 6px;
+}
+section.detail-section div.detail-info ul.meta li div.vote_average svg circle.stroke {
+  stroke: #FFF;
+  opacity: 0.2;
+}
+section.detail-section div.detail-info ul.meta li div.vote_average svg circle.progress {
+  fill: none;
+  stroke-dasharray: 10px;
+  transform-origin: center;
+  transform: rotate(-90deg);
+}
+section.detail-section div.detail-info ul.meta li div.vote_average b {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 600;
+}
+section.detail-section div.detail-info ul.meta li div.vote_average img.logo-small {
+  position: absolute;
+  top: 10px;
+  left: 110%;
+  width: 30px;
+}
+section.detail-section div.detail-info ul.meta li i {
+  font-size: 0.8em;
+}
+section.detail-section div.detail-info ul.meta li em {
+  font-size: 1.3em;
+}
+section.detail-section div.detail-info ul.meta li small {
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.8);
+}
+section.detail-section div.detail-info ul.meta li.genres {
+  width: 100%;
+  margin-top: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+section.detail-section div.detail-info p.overview {
+  margin-bottom: 20px;
+}
+section.detail-section div.detail-info ul.info {
+  padding: 20px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+}
+section.detail-section div.detail-info ul.info li:not(:last-child) {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+}
+section.detail-section div.detail-info ul.info li {
+  display: flex;
+  align-items: center;
+}
+section.detail-section div.detail-info ul.info i {
+  font-size: 0.8em;
+  margin-right: 3px;
+  color: rgba(255, 255, 255, 0.8);
+}
+section.detail-section div.detail-info ul.info small {
+  width: 50px;
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.8);
+}
+section.detail-section div.detail-info ul.info em {
+  flex: 1;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 footer {
   margin-top: 5vh;
   padding: 30px 0;

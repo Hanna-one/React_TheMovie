@@ -1,0 +1,130 @@
+@use '../setting/mixin.scss' as m;
+
+main.detail-content{
+  position: relative;
+  margin: 20vh auto 0 auto;
+  width: min(90%,1400px);
+}//main.detail-content
+
+section.detail-section{
+  max-width: 1200px;
+  margin: 0 auto;
+  @media #{m.$min-lg}{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }//min-lg
+  img.poster{
+    @media #{m.$min-lg}{
+      width: 25%;
+    }//min-lg
+    @media #{m.$max-lg}{
+      display: none;
+    }//max-lg
+  }//img.poster
+  div.detail-info{
+    @media #{m.$min-lg}{
+      width: 70%;
+    }//min-lg
+    h2{
+      margin-bottom: 20px;
+      font-size: min(10vw, 5em);
+      @include m.ellipsis;
+    }//h2
+    ul.meta{
+      display: flex;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(#fff, .5);
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      li{
+        margin-right: 10px;
+        div.vote_average{
+          position: relative;
+          display: inline-block;
+          vertical-align: bottom;
+          width: 60px;
+          height: 60px;
+          svg{
+            width: 100%;
+            border-radius: 50%;
+            background: var(--navy);
+            box-shadow: 0 0 10px rgba(#8ccda2,.2);
+            circle{
+              stroke-width: 6px;
+              &.stroke{
+                stroke: #FFF;
+                opacity: .2;
+              }//&.stroke
+              &.progress{
+                fill: none; //fill이 있으면 stroke를 덮으므로.
+                stroke-dasharray: 10px;
+                transform-origin: center;
+                transform: rotate(-90deg);
+              }//&.progress
+            }//circle
+          }//svg
+          b{
+            @include m.pos-center;
+            font-weight: 600;
+          }//b
+          img.logo-small{
+            position: absolute;
+            top: 10px; 
+            left: 110%;
+            width: 30px;
+          }//.logo-small
+        }//div.vote-average
+        i{
+          font-size: 0.8em;
+        }//i
+        em{
+          font-size: 1.3em;
+        }//em
+        small{
+          font-size: 0.9em;
+          color: rgba(#FFF,.8);
+        }//small
+        &.genres{
+          width: 100%;
+          margin-top: 10px;
+          @include m.ellipsis;
+        }//.genres
+      }//li
+    }//ul.meta
+    p.overview{
+      margin-bottom: 20px;
+    }//p.overview
+    /* ul.info--------------------------- */
+    ul.info{
+      padding: 20px;
+      border-radius: 5px;
+      background: rgba(#FFF,.1);
+      li:not(:last-child){
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px dotted rgba(#FFF,.3);
+      }//li:not(:last-child)
+      li{
+        display: flex;
+        align-items: center;
+      }//li
+      i{
+        font-size: .8em;
+        margin-right: 3px ;
+        color: rgba(#FFF,.8);
+      }//i
+      small{
+        width: 50px;
+        font-size: 0.9em;
+        color: rgba(#FFF,.8);
+      }//small
+      em{
+        flex: 1;
+        font-style: italic;
+        @include m.ellipsis;
+      }//em
+    }//ul.info
+  }//div.detail-info
+}//section.detail-section

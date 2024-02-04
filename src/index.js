@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
+import Detail from './pages/Detail';
 import "./style/scss/style.scss";
 import reportWebVitals from './reportWebVitals';
 
@@ -14,7 +15,8 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <NotFound />,
     children: [
-      {path: '/', element: <Home />}
+      {path: '/', element: <Home />},
+      {path: '/detail/:id', element: <Detail />}
     ]
   }
 ])

@@ -56,9 +56,8 @@ export default function HomeList({ title, option, num }) {
               prevEl: `.prevBtn${num}`,
               nextEl: `.nextBtn${num}`,
             }}
-            loop={true}
+            // loop={true}
             className={`${option}`}
-            slidesPerView={'auto'}
             modules={[Navigation]}
             breakpoints={{ //breakpoint가 들어있으면 {값} 이 return됨.
               300: {
@@ -87,6 +86,27 @@ export default function HomeList({ title, option, num }) {
               ? <p className="no-data">관련 영화목록이 존재하지 않습니다</p>
               :
               <>
+                {/* {movieList.map((list, idx) =>
+                  <SwiperSlide key={list.id}>
+                    <figure className="swiper-slide" >
+                      <Link to="./detail.php?id={list.id}">
+                        <div className="imgbox">
+                          {list.poster_path
+                            ? <img src={`${imgPaths.w500}${list.poster_path}`} alt="" />
+                            : <img src="./img/no-image.jpg" alt="" />
+                          }
+                          <span style={{ background: `${gradeColor[idx]}` }}></span>
+                          <small>{list.vote_average.toFixed(1)}</small>
+                        </div>
+                        <figcaption>
+                          <h3>{list.title}</h3>
+                          <p>{genreName[idx]}</p>
+                          <p>{list.release_date}</p>
+                        </figcaption>
+                      </Link>
+                    </figure>
+                  </SwiperSlide>
+                )} */}
                 {movieList.map((list, idx) =>
                   <SwiperSlide key={list.id}>
                     <figure className="swiper-slide" >
