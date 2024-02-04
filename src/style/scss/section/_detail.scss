@@ -81,10 +81,14 @@ section.detail-section{
         }//i
         em{
           font-size: 1.3em;
+
         }//em
         small{
           font-size: 0.9em;
           color: rgba(#FFF,.8);
+          &.hourtext{
+            margin-right: 5px;
+          }
         }//small
         &.genres{
           width: 100%;

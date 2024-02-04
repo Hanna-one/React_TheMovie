@@ -948,6 +948,9 @@ section.detail-section div.detail-info ul.meta li small {
   font-size: 0.9em;
   color: rgba(255, 255, 255, 0.8);
 }
+section.detail-section div.detail-info ul.meta li small.hourtext {
+  margin-right: 5px;
+}
 section.detail-section div.detail-info ul.meta li.genres {
   width: 100%;
   margin-top: 10px;
