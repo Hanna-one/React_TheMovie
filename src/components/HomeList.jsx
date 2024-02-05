@@ -110,7 +110,7 @@ export default function HomeList({ title, option, num }) {
                 {movieList.map((list, idx) =>
                   <SwiperSlide key={list.id}>
                     <figure className="swiper-slide" >
-                      <Link to="./detail.php?id={list.id}">
+                      <Link to={`/detail/${list.id}`}>
                         <div className="imgbox">
                           {list.poster_path
                             ? <img src={`${imgPaths.w500}${list.poster_path}`} alt="" />

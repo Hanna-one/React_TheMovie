@@ -1,0 +1,68 @@
+@use '../setting/mixin.scss' as m;
+
+main.search-content{
+  position: relative;
+  width: min(90%,1400px);
+  margin: 0 auto;
+  margin-top: 10vh;
+}//main.search-content
+
+form.search-form{
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  fieldset.search-keyword{
+    display: flex;
+    border: none;
+    >*{
+      height: 55px;
+      border: none;
+      background: #FFF;
+    }//span, input, button
+    .search-icon, button{
+      width: 55px; //span 은 inilne이지만 부모가 flex 이므로 넓이가능.
+      line-height: 55px;
+      color: var(--sky);
+      text-align: center;
+      font-size: 1.3em;
+    }//span, button
+    input{
+      flex: 1;
+      color: var(--sky);
+      font-size: 1.8em;
+      outline: none;
+      &::placeholder{
+        color: #DDD;
+      }//&::placeholder
+      &::-webkit-calendar-picker-indicator{ //input:time 같은 태그 통칭
+        display: none !important;
+      }
+    }//input
+  }//fieldset.search-keyword
+  fieldset.genre-btns{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 30px 0;
+    border: none;
+    button{
+      padding: 7px 25px;
+      margin: 5px;
+      border-radius: 5px;
+      background: var(--sky);
+      transition: background .3s;
+      &:hover{
+        background: var(--green);
+        color: var(--navy);
+      }//&:hover
+      &.active{
+        background: orange;
+      }//&.active
+    }//button
+  }//fieldset.genre-btns
+}//form.search-form
+
+.trigger{
+  opacity: 0;
+  border: 1px solid red;
+}

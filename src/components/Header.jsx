@@ -31,7 +31,7 @@ export default function Header() {
             </ul>
           </div>
 
-          <Link to="./search.php" className="goto-search" >
+          <Link to="/search" className="goto-search" >
             <BsSearch size="20" />
             <span>검색하기</span>
           </Link>

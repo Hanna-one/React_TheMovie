@@ -3,7 +3,7 @@ import { options, en, imgPaths } from '../api/api-data.js';
 import { GetMovieslist, getMovie, getMovies, getVideos } from '../api/api-function.js';
 import { BsGooglePlay, BsInfoCircleFill } from 'react-icons/bs';
 import { FaArrowDown } from 'react-icons/fa6';
-import { IoCloseCircle } from 'react-icons/io5';
+import { IoClose } from 'react-icons/io5';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import "swiper/css";
@@ -78,7 +78,6 @@ export default function HomeVisual() {
           modules={[Navigation, Autoplay]}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           // loop={true}
-          slidesPerView={'auto'}
           onRealIndexChange={realIndex => {
             setNum(realIndex.realIndex)
           }}
@@ -136,7 +135,7 @@ export default function HomeVisual() {
             <iframe src={videoUrl} allowFullScreen></iframe>
           </div>
           <button type="button" className="modal-close-btn" onClick={() => setVideoModalOpen(!videoModalOpen)}>
-            <IoCloseCircle />
+            <IoClose size="40"/>
           </button>
         </section>
       }

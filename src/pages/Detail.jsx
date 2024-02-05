@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getCredits, getImages, getMovie, getVideos } from '../api/api-function';
-import { en, genreList, gradeColors, imgPaths } from '../api/api-data';
+import { en, gradeColors, imgPaths } from '../api/api-data';
+import { IoClose } from 'react-icons/io5';
 
 export default function Detail() {
   const params = useParams();
@@ -14,39 +15,17 @@ export default function Detail() {
   const [companyName, setCompanyName] = useState("");
   const [directorList, setDirectorList] = useState([]);
   const [producerList, setProducerList] = useState([]);
-
-  // console.log(imageList.posters);
+  const [videoList, setVideoList] = useState([]);
+  const [castList, setCastList] = useState([]);
+  const [similarMovieList, setSimilarMovieList] = useState([]);
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const [videoUrl, setVideoUrl] = useState("");
 
 
   useEffect(() => {
     getMovieInformation();
     imageSlide(imageList);
   }, [])
-
-  /* const setItem = (lists) => {
-
-    let {
-      title, vote_average, vote_count, runtime, release_date, genres,
-      overview, original_title, production_companies
-    } = lists
-    vote_average = vote_average.toFixed(1)
-    let gradeLevel = Math.floor(vote_average - 5)
-    if (gradeLevel > 4) gradeLevel = 4
-    if (gradeLevel < 0) gradeLevel = 0
-    let gradecolor = gradeColors[gradeLevel]
-    genres = (genres.length) ? genres.map(genre => genre.name).join('/') : '장르 정보 없음'
-    
-    if (!overview) {
-      let enmovieData = getMovie(id, en)
-      overview = (enmovieData.overview) ? enmovieData.overview : '영화설명 정보 없음'
-    }
-
-    let company = (production_companies.length) ? production_companies.map(company => company.name).join(', ') : '제작사 정보 없음'
-
-    setGradeColor(gradecolor)
-    setGenreName(genres)
-    setCompanyName(company)
-  } */
 
   const getMovieInformation = async () => {
     let imageData = await getImages(id);
@@ -72,7 +51,6 @@ export default function Detail() {
       let enmovieData = getMovie(id, en)
       overview = (enmovieData.overview) ? enmovieData.overview : '영화설명 정보 없음'
     }
-
     let company = (production_companies.length) ? production_companies.map(company => company.name).join(', ') : '제작사 정보 없음'
 
     setGradeColor(gradecolor)
@@ -81,7 +59,7 @@ export default function Detail() {
 
     let credits = await getCredits(id)
     let { cast, crew } = credits
-    cast = cast.slice(0, 10)
+    setCastList(cast.slice(0, 10))
     /* 
     crew filter. map 상세설명 복붙하기
     */
@@ -94,17 +72,15 @@ export default function Detail() {
 
     let videoData = await getVideos(id)
     let videos = videoData.results
-    if (!videos.length) {
-      videoData = await getVideos(id, en)
+    if (videos.length === 0) { //videoData.results(video배열)의 길이가 0이라면(=ko영상없는것)
+      videoData = await getVideos(id, en) //영어로 된 영화영상을 가져온다
       videos = videoData.results
     }
+    setVideoList(videos);
   }
-
-  // console.log(movieInfo);
 
   const [slide, setSlide] = useState(false);
   const [num, setNum] = useState(0);
-  const ref = useRef();
 
   const imageSlide = (image) => {
     let n = 0
@@ -114,19 +90,29 @@ export default function Detail() {
 
     setInterval(() => {
       n++
-      if(n > 9) n = 1;
+      if (n > 9) n = 1;
       setNum(n);
     }, 5000)
   }
 
+  const getVideoUrl = (value) => {
+    setVideoUrl(`http://www.youtube.com/embed/${value}?playlist=${value}&autoplay=1&loop=1&mute=1&playsinline=1`);
+  }
+
+  const handlePlay = (e) => {
+    setVideoModalOpen(!videoModalOpen)
+    getVideoUrl(e.currentTarget.dataset.id)
+  }
+
+
   return (
     <>
-      <figure  className="slide">
+      <figure className="slide">
         {imageList.length < 2
           ? imageList.map((img, idx) =>
-            <img src={`http://localhost:3000/img/film${idx}.jpg`} className={slide ? `slide-img${idx} active` : `slide-img${idx}` } alt="" key={idx}/>)
+            <img src={`http://localhost:3000/img/film${idx}.jpg`} className={slide ? `slide-img${idx} active` : `slide-img${idx}`} alt="" key={idx} />)
           : imageList.map((img, idx) =>
-            <img src={`${imgPaths.original}${img.file_path}`} className={idx === num ? `slide-img${idx + 1} active` : `slide-img${idx + 1}`} alt="" key={idx}/>)
+            <img src={`${imgPaths.original}${img.file_path}`} className={idx === num ? `slide-img${idx + 1} active` : `slide-img${idx + 1}`} alt="" key={idx} />)
         }
       </figure>
       <main className="detail-content">
@@ -144,9 +130,9 @@ export default function Detail() {
                     <div className="vote_average">
                       <svg viewBox="0 0 100 100">
                         <circle cx="50" cy="50" r="35" className="stroke" />
-                        <circle cx="50" cy="50" r="35" pathLength="10" className="progress" />
+                        <circle cx="50" cy="50" r="35" pathLength="10" className="progress" style={{ stroke: `${gradeColor}` }}/>
                       </svg>
-                      <b className="average">{Number(movieInfo.vote_average).toFixed(1)}</b>
+                      <b className="average" style={{ color: `${gradeColor}` }}>{Number(movieInfo.vote_average).toFixed(1)}</b>
                       <img className="logo-small" src="http://localhost:3000/img/logo-square.png" alt="" />
                     </div>
                     <small className="vote_cnt">({movieInfo.vote_count})</small>
@@ -202,7 +188,26 @@ export default function Detail() {
             <em>출연진</em>
           </h2>
           <div className="grid-container">
-
+            {castList.length === 0
+              ? <p className="no-data">관련 정보가 존재하지 없습니다</p>
+              : castList.map(list =>
+                <figure key={list.id}>
+                  {/* <Link to={`${list.id}`}>
+                    <img src={(list.profile_path) ? `${imgPaths.w500}${list.profile_path}` : './img/no-image.jpg'} alt="" />
+                    <figcaption>
+                      <em>{list.name}</em>
+                      <b>{list.character}</b>
+                    </figcaption>
+                  </Link> */}
+                  <div>
+                    <img src={(list.profile_path) ? `${imgPaths.w500}${list.profile_path}` : './img/no-image.jpg'} alt="" />
+                    <figcaption>
+                      <em>{list.name}</em>
+                      <b>{list.character}</b>
+                    </figcaption>
+                  </div>
+                </figure>
+              )}
           </div>
         </section>
 
@@ -212,7 +217,13 @@ export default function Detail() {
             <em>관련 이미지</em>
           </h2>
           <div className="grid-container">
-
+            {imageList.length === 0
+              ? <p className="no-data">관련 이미지가 존재하지 없습니다</p>
+              : imageList.map(list =>
+                <div /* to={`${imgPaths.original}${list.file_path}`} */ className="viewbox-btn" key={list.file_path}>
+                  <img src={`${imgPaths.w500}${list.file_path}`} alt="" />
+                </div>
+              )}
           </div>
         </section>
 
@@ -222,11 +233,28 @@ export default function Detail() {
             <em>관련 영상</em>
           </h2>
           <div className="grid-container">
-
+            {videoList.length === 0
+              ? <p className="no-data">관련 영상이 존재하지 않습니다</p>
+              : videoList.map((list) =>
+                <button data-id={list.key} onClick={e => handlePlay(e)} key={list.id}>
+                  <img src={`https://img.youtube.com/vi/${list.key}/mqdefault.jpg`} alt="" />
+                </button>
+              )}
           </div>
         </section>
 
-        <section className="common-section movie-grid-section wrap-section similar-section">
+        {videoModalOpen &&
+          <section className="video-modal" style={{ display: !videoModalOpen ? "none" : "block" }}>
+            <div className="youtube-ratio">
+              <iframe src={videoUrl} allowFullScreen></iframe>
+            </div>
+            <button type="button" className="modal-close-btn" onClick={() => setVideoModalOpen(!videoModalOpen)}>
+            <IoClose size="40"/>
+            </button>
+          </section>
+        }
+
+        {/* <section className="common-section movie-grid-section wrap-section similar-section">
           <h2>
             <i className="fa-solid fa-photo-film"></i>
             <em>유사한 영화</em>
@@ -234,9 +262,12 @@ export default function Detail() {
           <div className="grid-container">
 
           </div>
-        </section>
+        </section> */}
       </main>
     </>
   );
 }
 
+{/* <Link to={`${imgPaths.original}${list.file_path}`} className="viewbox-btn" key={list.file_path}>
+  <img src={`${imgPaths.w500}${list.file_path}`} alt="" />
+</Link> */}
