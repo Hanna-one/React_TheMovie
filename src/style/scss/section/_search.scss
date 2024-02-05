@@ -20,6 +20,9 @@ form.search-form{
       background: #FFF;
     }//span, input, button
     .search-icon, button{
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 55px; //span 은 inilne이지만 부모가 flex 이므로 넓이가능.
       line-height: 55px;
       color: var(--sky);

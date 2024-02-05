@@ -1168,6 +1168,9 @@ form.search-form fieldset.search-keyword > * {
   background: #FFF;
 }
 form.search-form fieldset.search-keyword .search-icon, form.search-form fieldset.search-keyword button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 55px;
   line-height: 55px;
   color: var(--sky);

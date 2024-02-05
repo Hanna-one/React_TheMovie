@@ -245,30 +245,30 @@ export const getFilmography = (personId, lang=ko) => {
 // let signal = controller.signal
 // //fetch를 중지시키는 브레이크. 반드시 let으로 받아야함.
 
-// export const searchByKeyword = (keyword, lang = ko) => {
-//   return new Promise(async resolve => {
-//     controller = new AbortController()//끊긴 전선을 새로 만들고
-//     signal = controller.signal//다시 선언함
-//     try{
-//       const result = await fetch(
-//       `${baseUrl}/search/movie${apiKey}${lang}&query=${keyword}`,{signal} 
-//       //fetch의 첫번째는 주소, 두번째는 객체가 와야함.
-//       )
-//       const data = await result.json()
-//       resolve(data)
-//     }catch{}
-//   })//promise
-// }//searchByKeyword
+export const searchByKeyword = (keyword, lang = ko) => {
+  return new Promise(async resolve => {
+    let controller = new AbortController()//끊긴 전선을 새로 만들고
+    let signal = controller.signal//다시 선언함
+    try{
+      const result = await fetch(
+      `${baseUrl}/search/movie${apiKey}${lang}&query=${keyword}`,{signal} 
+      //fetch의 첫번째는 주소, 두번째는 객체가 와야함.
+      )
+      const data = await result.json()
+      resolve(data)
+    }catch{}
+  })//promise
+}//searchByKeyword
 
-// export const searchByGenres = (genreNumbers, page='1') => {
-//   return new Promise ( async resolve => {
-//     controller = new AbortController()
-//     signal = controller.signal
-//       const result = await fetch(`
-//         ${baseUrl}/discover/movie${apiKey}&with_genres=${genreNumbers}&page=${page}`,
-//         {signal}
-//       )
-//       const data = result.json()
-//     resolve(data)
-//   })//promise
-// }//searchByGenres
+export const searchByGenres = (genreNumbers, page='1') => {
+  return new Promise ( async resolve => {
+    let controller = new AbortController()
+    let signal = controller.signal
+      const result = await fetch(`
+        ${baseUrl}/discover/movie${apiKey}&with_genres=${genreNumbers}&page=${page}`,
+        {signal}
+      )
+      const data = result.json()
+    resolve(data)
+  })//promise
+}//searchByGenres

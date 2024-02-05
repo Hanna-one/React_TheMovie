@@ -109,8 +109,7 @@ export default function Detail() {
     <>
       <figure className="slide">
         {imageList.length < 2
-          ? imageList.map((img, idx) =>
-            <img src={`http://localhost:3000/img/film${idx}.jpg`} className={slide ? `slide-img${idx} active` : `slide-img${idx}`} alt="" key={idx} />)
+          ? <img src={`http://localhost:3000/img/film${num}.jpg`} className={slide ? `slide-img${num} active` : `slide-img${num}`} alt="" key={num} />
           : imageList.map((img, idx) =>
             <img src={`${imgPaths.original}${img.file_path}`} className={idx === num ? `slide-img${idx + 1} active` : `slide-img${idx + 1}`} alt="" key={idx} />)
         }
