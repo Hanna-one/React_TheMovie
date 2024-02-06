@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BsList } from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
-import Topbutton from "./Topbutton";
-
 
 export default function Header() {
   const [toggle, setToggle] = useState(false);
@@ -25,9 +23,9 @@ export default function Header() {
               <BsList size="25" />
             </button>
             <ul className={toggle ? "active" : null}>
-              <li><Link to="./list.php?list=playing&page=1">현재상영작</Link></li>
-              <li><Link to="./list.php?list=popular&page=1">인기영화</Link></li>
-              <li><Link to="./list.php?list=upcoming&page=1">최신/개봉예정</Link></li>
+              <li><Link to="/list/playing/1">현재상영작</Link></li>
+              <li><Link to="/list/popular/1">인기영화</Link></li>
+              <li><Link to="/list/upcoming/1">최신/개봉예정</Link></li>
             </ul>
           </div>
 

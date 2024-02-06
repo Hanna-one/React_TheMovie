@@ -20,7 +20,6 @@ export default function Home() {
         <HomeList title="평점이 높은 영화" option={options.rated} num={3}/>
         <HomeList title="주간 화제작" option={options.trend} num={4}/>
       </main>
-      <Topbutton />
     </>
   );
 }

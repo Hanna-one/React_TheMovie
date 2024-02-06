@@ -1,0 +1,12 @@
+@use '../setting/mixin.scss' as m;
+
+div.notfound_section{
+  margin: auto 0; 
+  width: 100vw; 
+  height: 90vh; 
+  line-height: 90vh;
+  h1{
+    font-size: 40px;
+    text-align: center;
+  }
+}

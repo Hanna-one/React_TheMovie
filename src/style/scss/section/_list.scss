@@ -1,0 +1,28 @@
+@use '../setting/mixin.scss' as m;
+
+main.list-content{
+  position: relative;
+  width: min(90%,1400px);
+  margin: 0 auto;
+  margin-top: 15vh;
+  h2.list-title{
+    text-align: center;
+    font-weight: 900;
+    font-size: min(9vw, 4em);
+    color: var(--sky);
+  }//h2
+  .paging{
+    text-align: center;
+    a{
+      margin: 0 5px;
+      opacity: .7;
+      &:hover{
+        opacity: 1;
+      }//a:hover
+      &.active{
+        opacity: 1;
+        font-weight: 600;
+      }//a.active
+    }//a
+  }//.paging
+}//main.list-content

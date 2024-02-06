@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getCredits, getImages, getMovie, getVideos } from '../api/api-function';
 import { en, gradeColors, imgPaths } from '../api/api-data';
 import { IoClose } from 'react-icons/io5';

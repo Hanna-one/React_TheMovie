@@ -8,6 +8,7 @@ import Detail from './pages/Detail';
 import "./style/scss/style.scss";
 import reportWebVitals from './reportWebVitals';
 import Search from './pages/Search';
+import List from './pages/List';
 
 
 const router = createBrowserRouter([
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       {path: '/', element: <Home />},
+      {path: '/list/:option/:page', element: <List />},
       {path: '/detail/:id', element: <Detail />},
       {path: '/search', element: <Search />}
     ]

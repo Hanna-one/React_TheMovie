@@ -149,7 +149,7 @@ export default function Search() {
             <i className="fa-solid fa-square-poll-vertical"></i>
             <em>검색결과</em>
           </h2>
-          <div className="grid-container" ref={containerRef}>
+          <div className="grid-container">
             {isPending && movieList.length === 0
               ? <p className="no-data">관련 영화목록이 존재하지 않습니다</p>
               :
