@@ -4,15 +4,14 @@
 @import "./setting/reset";
 @import "./setting/modal";
 @import "./setting/slide";
-@import "./setting/viewbox";
 @import "./setting/mixin";
 
 // section
 @import "./section/header";
 @import "./section/home-visual";
-@import "./section/topbutton";
-@import "./section/detail";
 @import "./section/search";
+@import "./section/detail";
 @import "./section/list";
-@import "./section/notfound";
+@import "./section/topbutton";
 @import "./section/footer";
+@import "./section/notfound";

@@ -1,11 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import Topbutton from '../components/Topbutton';
-import { options, ko, en, imgPaths } from '../api/api-data.js';
-import { getMovie, getMovies, getVideos } from '../api/api-function.js';
-import { BsGooglePlay, BsInfoCircleFill } from 'react-icons/bs';
-import { FaArrowDown } from 'react-icons/fa6';
-import { IoCloseCircle } from 'react-icons/io5';
-import SetSwiper from '../components/HomeVisual.jsx';
+import React from 'react';
+import { options } from '../api/api-data.js';
 import HomeVisual from '../components/HomeVisual.jsx';
 import HomeList from '../components/HomeList.jsx';
 

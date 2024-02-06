@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getCredits, getImages, getMovie, getVideos } from '../api/api-function';
 import { en, gradeColors, imgPaths } from '../api/api-data';
 import { IoClose } from 'react-icons/io5';
+import { BsBuilding, BsCameraReelsFill, BsCameraVideoFill, BsClipboardCheckFill, BsClockHistory, BsImage, BsImages, BsPeopleFill, BsPersonFillGear } from 'react-icons/bs';
 
 export default function Detail() {
-  const params = useParams();
-  const id = params.id;
   const [imageList, setImageList] = useState([]);
   const [movieInfo, setMovieInfo] = useState([]);
-  const [runtime, setRuntime] = useState([]);
   const [gradeColor, setGradeColor] = useState("");
   const [genreName, setGenreName] = useState([]);
   const [companyName, setCompanyName] = useState("");
@@ -17,10 +15,11 @@ export default function Detail() {
   const [producerList, setProducerList] = useState([]);
   const [videoList, setVideoList] = useState([]);
   const [castList, setCastList] = useState([]);
-  const [similarMovieList, setSimilarMovieList] = useState([]);
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const [videoUrl, setVideoUrl] = useState("");
 
+  const params = useParams();
+  const id = params.id;
 
   useEffect(() => {
     getMovieInformation();
@@ -36,10 +35,7 @@ export default function Detail() {
     let movieData = await getMovie(id);
     setMovieInfo(movieData);
 
-    let {
-      title, vote_average, vote_count, runtime, release_date, genres,
-      overview, original_title, production_companies
-    } = movieData
+    let { vote_average, release_date, genres, overview, production_companies } = movieData
     let gradeLevel = Math.floor(vote_average - 5)
     if (gradeLevel > 4) gradeLevel = 4
     if (gradeLevel < 0) gradeLevel = 0
@@ -60,15 +56,11 @@ export default function Detail() {
     let credits = await getCredits(id)
     let { cast, crew } = credits
     setCastList(cast.slice(0, 10))
-    /* 
-    crew filter. map 상세설명 복붙하기
-    */
+
     let directors = crew.filter(v => v.job === 'Director').map(v => v.name).join(', ')
     setDirectorList(directors ? directors : '감독 정보 없음')
-    //setDirectorist(directors)
     let producers = crew.filter(v => v.job === 'Producer').map(v => v.name).join(', ')
     setProducerList(producers ? producers : '제작자 정보 없음')
-    //setProducerList(producers)
 
     let videoData = await getVideos(id)
     let videos = videoData.results
@@ -104,7 +96,6 @@ export default function Detail() {
     getVideoUrl(e.currentTarget.dataset.id)
   }
 
-
   return (
     <>
       <figure className="slide">
@@ -137,40 +128,37 @@ export default function Detail() {
                     <small className="vote_cnt">({movieInfo.vote_count})</small>
                   </li>
                   <li>
-                    <i className="fa-solid fa-clock-rotate-left"></i>
                     <em className="hour">{movieInfo.runtime && parseInt(movieInfo.runtime / 60)}</em>
                     <small className="hourtext">Hour</small>
                     <em className="min">{movieInfo.runtime && movieInfo.runtime % 60}</em>
                     <small>Min</small>
                   </li>
                   <li>
-                    <i className="fa-regular fa-calendar-check"></i>
                     <small className="date">{movieInfo.release_date}</small>
                   </li>
                   <li className="genres">
-                    <i className="fa-solid fa-tags"></i>
                     <small className="genre">{genreName}</small>
                   </li>
                 </ul>
                 <p className="overview">{movieInfo.overview}</p>
                 <ul className="info">
                   <li>
-                    <i className="fa-solid fa-clapperboard"></i>
+                    <i><BsClipboardCheckFill /></i>
                     <small>제목</small>
                     <em className="original_title">{movieInfo.original_title}</em>
                   </li>
                   <li>
-                    <i className="fa-solid fa-building"></i>
+                    <i><BsBuilding /></i>
                     <small>제작사</small>
                     <em className="production">{companyName}</em>
                   </li>
                   <li>
-                    <i className="fa-solid fa-user-tie"></i>
+                    <i><BsCameraReelsFill /></i>
                     <small>제작자</small>
                     <em className="producer">{producerList}</em>
                   </li>
                   <li>
-                    <i className="fa-solid fa-user-gear"></i>
+                    <i><BsPersonFillGear /></i>
                     <small>감독</small>
                     <em className="director">{directorList}</em>
                   </li>
@@ -183,7 +171,7 @@ export default function Detail() {
 
         <section className="common-section scroll-section people-section">
           <h2>
-            <i className="fa-solid fa-users"></i>
+            <i><BsPeopleFill /></i>
             <em>출연진</em>
           </h2>
           <div className="grid-container">
@@ -191,13 +179,6 @@ export default function Detail() {
               ? <p className="no-data">관련 정보가 존재하지 없습니다</p>
               : castList.map(list =>
                 <figure key={list.id}>
-                  {/* <Link to={`${list.id}`}>
-                    <img src={(list.profile_path) ? `${imgPaths.w500}${list.profile_path}` : './img/no-image.jpg'} alt="" />
-                    <figcaption>
-                      <em>{list.name}</em>
-                      <b>{list.character}</b>
-                    </figcaption>
-                  </Link> */}
                   <div>
                     <img src={(list.profile_path) ? `${imgPaths.w500}${list.profile_path}` : './img/no-image.jpg'} alt="" />
                     <figcaption>
@@ -212,14 +193,14 @@ export default function Detail() {
 
         <section className="common-section scroll-section img-section">
           <h2>
-            <i className="fa-solid fa-image"></i>
+            <i><BsImage /></i>
             <em>관련 이미지</em>
           </h2>
           <div className="grid-container">
             {imageList.length === 0
               ? <p className="no-data">관련 이미지가 존재하지 없습니다</p>
               : imageList.map(list =>
-                <div /* to={`${imgPaths.original}${list.file_path}`} */ className="viewbox-btn" key={list.file_path}>
+                <div className="viewbox-btn" key={list.file_path}>
                   <img src={`${imgPaths.w500}${list.file_path}`} alt="" />
                 </div>
               )}
@@ -228,7 +209,7 @@ export default function Detail() {
 
         <section className="common-section scroll-section video-section">
           <h2>
-            <i className="fa-solid fa-video"></i>
+            <i><BsCameraVideoFill /></i>
             <em>관련 영상</em>
           </h2>
           <div className="grid-container">
@@ -253,20 +234,7 @@ export default function Detail() {
           </section>
         }
 
-        {/* <section className="common-section movie-grid-section wrap-section similar-section">
-          <h2>
-            <i className="fa-solid fa-photo-film"></i>
-            <em>유사한 영화</em>
-          </h2>
-          <div className="grid-container">
-
-          </div>
-        </section> */}
       </main>
     </>
   );
 }
-
-{/* <Link to={`${imgPaths.original}${list.file_path}`} className="viewbox-btn" key={list.file_path}>
-  <img src={`${imgPaths.w500}${list.file_path}`} alt="" />
-</Link> */}

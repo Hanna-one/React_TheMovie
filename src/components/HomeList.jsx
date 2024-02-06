@@ -14,6 +14,10 @@ export default function HomeList({ title, option, num }) {
   const [gradeColor, setGradeColor] = useState("");
   const [genreName, setGenreName] = useState([]);
 
+  useEffect(() => {
+    getMovieList(option);
+  }, [])
+
   const setItem = (lists) => {
     let gradelist = [];
     let genrelist = [];
@@ -38,10 +42,6 @@ export default function HomeList({ title, option, num }) {
     setMovieList(movies);
     setItem(movies);
   }
-
-  useEffect(() => {
-    getMovieList(option);
-  }, [])
 
   return (
     <section className="common-section movie-grid-section swiper-section popular-section" >

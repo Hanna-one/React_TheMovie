@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { genreList, gradeColors, imgPaths, ko, options } from '../api/api-data';
 import { Link, useParams } from 'react-router-dom';
+import { genreList, gradeColors, imgPaths, ko, options } from '../api/api-data';
 import { getMovies } from '../api/api-function';
 import Paging from '../components/Paging';
+import { BsFilm } from 'react-icons/bs';
 
 export default function List() {
   const [imageList, setImageList] = useState([]);
@@ -23,19 +24,6 @@ export default function List() {
     getMovieList();
     imageSlide(imageList);
   }, [list, page])
-  
-  const getTitle = () => {
-    if (list === 'playing') {
-      option = options.playing
-      setTitle('현재상영작')
-    } else if (list === 'popular') {
-      option = options.popular
-      setTitle('인기영화')
-    } else if (list === 'upcoming') {
-      option = options.upcoming
-      setTitle('최신/개봉예정')
-    }
-  }
 
   const imageSlide = (image) => {
     let n = 0
@@ -105,7 +93,7 @@ export default function List() {
 
         <section className="common-section movie-grid-section wrap-section list-section">
           <h2>
-            <i className="fa-solid fa-photo-film"></i>
+            <i><BsFilm /></i>
             <em></em>
           </h2>
           <div className="grid-container">

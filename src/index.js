@@ -4,11 +4,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
+import Search from './pages/Search';
 import Detail from './pages/Detail';
+import List from './pages/List';
 import "./style/scss/style.scss";
 import reportWebVitals from './reportWebVitals';
-import Search from './pages/Search';
-import List from './pages/List';
 
 
 const router = createBrowserRouter([
@@ -18,9 +18,9 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       {path: '/', element: <Home />},
-      {path: '/list/:option/:page', element: <List />},
+      {path: '/search', element: <Search />},
       {path: '/detail/:id', element: <Detail />},
-      {path: '/search', element: <Search />}
+      {path: '/list/:option/:page', element: <List />}
     ]
   }
 ])
