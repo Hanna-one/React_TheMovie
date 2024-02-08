@@ -26,3 +26,26 @@ php기반으로 만들어진 프로젝트 TBDM를 REACT로 변환하는 프로�
 4️⃣ REST API를 통한 데이터베이스 수집
 
 </aside>
+
+
+## 🛠 𝗦𝘁𝗮𝗰𝗸𝘀
+
+$\large\color{black}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$
+
+### L**anguage**
+
+---
+
+- HTML
+- Java Script(JQuery, JSON, AJAX)
+
+- CSS
+- REST API
+
+### Collaboration & Tools
+
+---
+
+- TMDB API
+
+- Git / GitHub
